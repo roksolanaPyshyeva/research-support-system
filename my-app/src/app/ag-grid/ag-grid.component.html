@@ -14,4 +14,68 @@
     [enableColResize]="true"
     ></ag-grid-angular>
 </div>
+ 
+<h4>Processing Time Analytical Indicators</h4>
+<div class="item">
+    <div>
+        <p>Min Processing Time : <span>{{timeMin}} ms</span></p>
+    </div>
+    <div>
+        <p>Max Processing Time : <span>{{timeMax}} ms</span></p>
+    </div>
+    <div>
+        <p>Average Processing Time : <span>{{timeAvg}} ms</span></p>
+    </div>
+</div>
+<h4>Original Picture Analytical Indicators</h4>
+<div class="container">
+    <div class="item">
+        <div>
+            <p>Min Original PSNR : <span>{{ OriginalPsnrMin}} ms</span></p>
+        </div>
+        <div>
+            <p>Max Original PSNR : <span>{{ OriginalPsnrMax}} ms</span></p>
+        </div>
+        <div>
+            <p>Average Original PSNR : <span>{{ OriginalPsnrAvg}} ms</span></p>
+        </div>
+    </div>
+    <div class="item">
+        <div>
+            <p>Min Original SSIM : <span>{{ OriginalSsimMin}} ms</span></p>
+        </div>
+        <div>
+            <p>Max Original SSIM : <span>{{ OriginalSsimMax}} ms</span></p>
+        </div>
+        <div>
+            <p>Average Original SSIM : <span>{{ OriginalSsimAvg}} ms</span></p>
+        </div>
+    </div>
+</div>
+<h4>Watermark Analytical Indicators</h4>
+<div class="container">
+    <div class="item">
+        <div>
+            <p>Min Watermark PSNR : <span>{{ WatermarkPsnrMin}} ms</span></p>
+        </div>
+        <div>
+            <p>Max Watermark PSNR : <span>{{ WatermarkPsnrMax}} ms</span></p>
+        </div>
+        <div>
+            <p>Average Watermark PSNR : <span>{{ WatermarkPsnrAvg}} ms</span></p>
+        </div>
+    </div>
+    <div class="item">
+        <div>
+            <p>Min Watermark SSIM : <span>{{ WatermarkSsimMin}} ms</span></p>
+        </div>
+        <div>
+            <p>Max Watermark SSIM : <span>{{ WatermarkSsimMax}} ms</span></p>
+        </div>
+        <div>
+            <p>Average Watermark SSIM : <span>{{ WatermarkSsimAvg}} ms</span></p>
+        </div>
+    </div>
+</div>
+
 
