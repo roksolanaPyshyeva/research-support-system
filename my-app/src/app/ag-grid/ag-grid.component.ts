@@ -37,6 +37,7 @@ export class AgGridComponent implements OnInit {
   public WatermarkSsimMax: any;
   public WatermarkSsimAvg: any;
   public WatermarkSsimADeviation: any;
+  private multiSortKey;
 
 
   constructor( public af: AngularFire) {
@@ -61,17 +62,20 @@ export class AgGridComponent implements OnInit {
       {
         headerName: "Frame Size",
         field: "FrameSize",
-        width: 110
+        width: 110,
+        filter: "agNumberColumnFilter"
       },
       {
         headerName: "KP",
         field: "KP",
-        width: 100
+        width: 100,
+        filter: "agNumberColumnFilter"
       },
       {
         headerName: "Repeats",
         field: "Repeats",
-        width: 100
+        width: 100,
+        filter: "agNumberColumnFilter"
       },
       {
         headerName: "Start Time",
@@ -84,25 +88,31 @@ export class AgGridComponent implements OnInit {
       {
         headerName: "Processing Time",
         field: "ProcessingTime",
-        width: 100
+        width: 100,
+        filter: "agNumberColumnFilter"
       },
       {
         headerName: "Original PSNR",
-        field: "OriginalPSNR"
+        field: "OriginalPSNR",
+        filter: "agNumberColumnFilter"
       },
       {
         headerName: "Original SSIM",
-        field: "OriginalSSIM"
+        field: "OriginalSSIM",
+        filter: "agNumberColumnFilter"
       },
       {
         headerName: "Watermark PSNR",
-        field: "WatermarkPSNR"
+        field: "WatermarkPSNR",
+        filter: "agNumberColumnFilter"
       },
       {
         headerName: "Watermark SSIM",
-        field: "WatermarkSSIM"
+        field: "WatermarkSSIM",
+        filter: "agNumberColumnFilter"
       },
     ];
+    this.multiSortKey = "ctrl";
    }
 
   ngOnInit() {
