@@ -20,18 +20,23 @@ export class AgGridComponent implements OnInit {
   public timeMin: any;
   public timeMax: any;
   public timeAvg: any;
+  public timeDeviation: any;
   public OriginalPsnrMin: any;
   public OriginalPsnrMax: any;
   public OriginalPsnrAvg: any;
+  public OriginalPsnrDeviation: any;
   public OriginalSsimMin: any;
   public OriginalSsimMax: any;
   public OriginalSsimAvg: any;
+  public OriginalSsimDeviation: any;
   public WatermarkPsnrMin: any;
   public WatermarkPsnrMax: any;
   public WatermarkPsnrAvg: any;
+  public WatermarkPsnrDeviation: any;
   public WatermarkSsimMin: any;
   public WatermarkSsimMax: any;
   public WatermarkSsimAvg: any;
+  public WatermarkSsimADeviation: any;
 
 
   constructor( public af: AngularFire) {
@@ -156,20 +161,40 @@ export class AgGridComponent implements OnInit {
     }, 0)
     this.OriginalPsnrAvg = (this.OriginalPsnrAvg/this.encryptionExperiments.length).toFixed(2);
 
+    this.OriginalPsnrDeviation = this.encryptionExperiments.reduce((total, el) => {
+      return total+(el.OriginalPSNR-this.OriginalPsnrAvg)**2;
+    }, 0)
+    this.OriginalPsnrDeviation = Math.sqrt(this.OriginalPsnrDeviation/this.encryptionExperiments.length).toFixed(2);
+
     this.OriginalSsimAvg = this.encryptionExperiments.reduce((total, el) => {
       return total+el.OriginalSSIM;
     }, 0)
     this.OriginalSsimAvg = (this.OriginalSsimAvg/this.encryptionExperiments.length).toFixed(2);
+
+    this.OriginalSsimDeviation = this.encryptionExperiments.reduce((total, el) => {
+      return total+(el.OriginalSSIM-this.OriginalSsimAvg)**2;
+    }, 0)
+    this.OriginalSsimDeviation = Math.sqrt(this.OriginalSsimDeviation/this.encryptionExperiments.length).toFixed(2);
 
     this.WatermarkPsnrAvg= this.decryptionExperiments.reduce((total, el) => {
       return total+el.WatermarkPSNR;
     }, 0)
     this.WatermarkPsnrAvg = (this.WatermarkPsnrAvg/this.decryptionExperiments.length).toFixed(2);
 
+    this.WatermarkPsnrDeviation = this.decryptionExperiments.reduce((total, el) => {
+      return total+(el.WatermarkPSNR-this.WatermarkPsnrAvg)**2;
+    }, 0)
+    this.WatermarkPsnrDeviation = Math.sqrt(this.WatermarkPsnrDeviation/this.decryptionExperiments.length).toFixed(2);
+
     this.WatermarkSsimAvg= this.decryptionExperiments.reduce((total, el) => {
       return total+el.WatermarkSSIM;
     }, 0)
     this.WatermarkSsimAvg = (this.WatermarkSsimAvg/this.decryptionExperiments.length).toFixed(4);
+
+    this.WatermarkSsimADeviation = this.decryptionExperiments.reduce((total, el) => {
+      return total+(el.WatermarkSSIM-this.WatermarkSsimAvg)**2;
+    }, 0)
+    this.WatermarkSsimADeviation = Math.sqrt(this.WatermarkSsimADeviation/this.decryptionExperiments.length).toFixed(4);
 
     this.rowData.sort((a,b) => {
       return a.ProcessingTime-b.ProcessingTime;
@@ -181,5 +206,10 @@ export class AgGridComponent implements OnInit {
       return total+ el.ProcessingTime
     }, 0);
     this.timeAvg = (this.timeAvg / this.rowData.length).toFixed(2);
+
+    this.timeDeviation = this.rowData.reduce((total, el) => {
+      return total+(el.ProcessingTime-this.timeAvg)**2;
+    }, 0)
+    this.timeDeviation = Math.sqrt(this.timeDeviation/this.rowData.length).toFixed(2);
   }
 }
