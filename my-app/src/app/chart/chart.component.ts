@@ -36,6 +36,7 @@ export class ChartComponent implements OnInit {
 
   onXSelected(xAxes) {
     this.xAxes = xAxes;
+    console.log(this.xAxes)
     this.updateChart(this.rowData);
   }
   onYSelected(yAxes) {
@@ -81,7 +82,7 @@ export class ChartComponent implements OnInit {
       // };
       if(this.chart.chart) {
         // console.log("bla");
-        // this.chart.chart.config.data.labels = this.labels;
+        this.chart.chart.config.data.labels = this.labels;
         this.chart.chart.config.type = this.chartType;
         // this.chart.chart.config.options.tooltips.callbacks = callbacks;
         this.chart.chart.update();
