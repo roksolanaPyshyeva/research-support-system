@@ -5,6 +5,8 @@ import { AngularFireModule } from 'angularfire2'
 import { AppComponent } from './app.component';
 import { AgGridComponent } from './ag-grid/ag-grid.component';
 import { AgGridModule } from "ag-grid-angular";
+import { ChartComponent } from './chart/chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA2asS4za8BxKFsSuBGedAm1vyoY53fsGs",
@@ -18,12 +20,14 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    AgGridComponent
+    AgGridComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

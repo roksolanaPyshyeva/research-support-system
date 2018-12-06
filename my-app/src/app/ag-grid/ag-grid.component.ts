@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
 
 
@@ -9,10 +9,12 @@ import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 
 })
 export class AgGridComponent implements OnInit {
 
+  @Input() rowData:  any;
+
   public items;
   private gridApi;
   private gridColumnApi;
-  private rowData: any[];
+  // private rowData: any[];
 
   private columnDefs;
   public encryptionExperiments = [];
@@ -139,14 +141,6 @@ export class AgGridComponent implements OnInit {
     });
     this.divideEncryptionAndDecryption(filteredRows);
     this.countAnalyticalIndicators(filteredRows);
-    // filteredRows = recalculateRatio(filteredRows);
-    // event.api.getModel().rowsToDisplay.forEach((node, index) => {
-    //   node.setDataValue('ratio', filteredRows[index].ratio);
-    // });
-    // this.gridApi.setPinnedBottomRowData(this.countGrandTotal(filteredRows));
-    // this.totalDealsChange.emit(this.gridApi.getModel().rootNode.childrenAfterFilter.length);
-    // this.gridApi.deselectAll();
-    // this.gridApi.selectAllFiltered();
   }
 
 

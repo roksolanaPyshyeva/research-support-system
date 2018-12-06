@@ -1,0 +1,54 @@
+<div class="chart-selections" >
+  <div>
+    <h4>Chart Type</h4>
+    <select (change)="onChartTypeSelected($event.target.value)">
+      <option value="bar">Bar Chart</option>
+      <option value="line">Line Chart</option>
+      <option value="pie">Pie Chart</option>
+      <option value="scatter">Scatter Chart</option>
+      <option value="bubble">Bubble Chart</option>
+    </select>
+  </div>
+  <div>
+      <h4>X Axes</h4>
+      <select (change)="onXSelected($event.target.value)">
+        <option value="KP">Component</option>
+        <option value="ProcessingTime">Processing Time</option>
+        <option value="FrameSize">Frame Size</option>
+        <option value="Repeats">Repeats</option>
+        <option value="OriginalPSNR">Original PSNR</option>
+        <option value="OriginalSSIM">Original SSIM</option>
+        <option value="WatermarkPSNR">Watermark PSNR</option>
+        <option value="WatermarkSSIM">Watermark SSIM</option>
+      </select>
+  </div>
+  <div>
+      <h4>Y Axes</h4>
+      <select (change)="onYSelected($event.target.value)">
+          <option value="OriginalPSNR">Original PSNR</option>
+          <option value="KP">Component</option>
+          <option value="ProcessingTime">Processing Time</option>
+          <option value="FrameSize">Frame Size</option>
+          <option value="Repeats">Repeats</option>    
+          <option value="OriginalSSIM">Original SSIM</option>
+          <option value="WatermarkPSNR">Watermark PSNR</option>
+          <option value="WatermarkSSIM">Watermark SSIM</option>
+        </select>
+  </div>
+
+</div>
+
+
+<div class="chart">
+  <canvas 
+    #canvas
+    id="canvas"
+    baseChart
+    [chartType]="chartType"
+    [datasets]="chartData"
+    [labels]="labels"
+    [options]="chartOptions"
+    [legend]="true"
+    [colors]="colors">
+  </canvas>
+</div>

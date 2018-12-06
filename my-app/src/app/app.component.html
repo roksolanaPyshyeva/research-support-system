@@ -1,2 +1,6 @@
-<app-ag-grid></app-ag-grid>
+<div *ngIf = 'rowData'>
+    <app-chart [rowData] = 'rowData'></app-chart>
+    <app-ag-grid [rowData] = 'rowData'></app-ag-grid>
+</div>
+
 
