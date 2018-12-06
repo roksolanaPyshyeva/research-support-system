@@ -10,6 +10,7 @@
     [floatingFilter]="true"
     [enableSorting]="true"
     (gridReady)="onGridReady($event)"
+    (filterChanged)="onFilterChanged($event)"
     [rowDragManaged]="true"
     [enableColResize]="true"
     [multiSortKey]="multiSortKey"

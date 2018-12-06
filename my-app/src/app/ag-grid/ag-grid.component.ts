@@ -122,8 +122,8 @@ export class AgGridComponent implements OnInit {
   getExperimentsList(){
     this.af.database.list('/experiments').subscribe((data) => {
       this.rowData = data;
-      this.divideEncryptionAndDecryption();
-      this.countAnalyticalIndicators();
+      this.divideEncryptionAndDecryption(this.rowData);
+      this.countAnalyticalIndicators(this.rowData);
       
     });
   }
@@ -132,15 +132,35 @@ export class AgGridComponent implements OnInit {
     this.gridColumnApi = params.columnApi;
   }
 
-  divideEncryptionAndDecryption() {
-    this.rowData.forEach((item) => {
+  onFilterChanged(event): void {
+    let filteredRows = [];
+    event.api.getModel().rowsToDisplay.forEach((node) => {
+      filteredRows.push(node.data);
+    });
+    this.divideEncryptionAndDecryption(filteredRows);
+    this.countAnalyticalIndicators(filteredRows);
+    // filteredRows = recalculateRatio(filteredRows);
+    // event.api.getModel().rowsToDisplay.forEach((node, index) => {
+    //   node.setDataValue('ratio', filteredRows[index].ratio);
+    // });
+    // this.gridApi.setPinnedBottomRowData(this.countGrandTotal(filteredRows));
+    // this.totalDealsChange.emit(this.gridApi.getModel().rootNode.childrenAfterFilter.length);
+    // this.gridApi.deselectAll();
+    // this.gridApi.selectAllFiltered();
+  }
+
+
+  divideEncryptionAndDecryption(data) {
+    this.encryptionExperiments = [];
+    this.decryptionExperiments = [];
+    data.forEach((item) => {
       item.Operation === "Encryption" 
       ? this.encryptionExperiments.push(item) 
       : this.decryptionExperiments.push(item);
     })
   }
 
-  countAnalyticalIndicators(){
+  countAnalyticalIndicators(data){
     this.encryptionExperiments.sort((a,b) => {
       return a.OriginalPSNR - b.OriginalPSNR;
     })
@@ -206,20 +226,20 @@ export class AgGridComponent implements OnInit {
     }, 0)
     this.WatermarkSsimADeviation = Math.sqrt(this.WatermarkSsimADeviation/this.decryptionExperiments.length).toFixed(4);
 
-    this.rowData.sort((a,b) => {
+    data.sort((a,b) => {
       return a.ProcessingTime-b.ProcessingTime;
     })
-    this.timeMin = this.rowData[0].ProcessingTime;
-    this.timeMax = this.rowData[this.rowData.length-1].ProcessingTime;
+    this.timeMin = data[0].ProcessingTime;
+    this.timeMax = data[data.length-1].ProcessingTime;
 
-    this.timeAvg = this.rowData.reduce((total, el) => {
+    this.timeAvg = data.reduce((total, el) => {
       return total+ el.ProcessingTime
     }, 0);
-    this.timeAvg = (this.timeAvg / this.rowData.length).toFixed(2);
+    this.timeAvg = (this.timeAvg / data.length).toFixed(2);
 
-    this.timeDeviation = this.rowData.reduce((total, el) => {
+    this.timeDeviation = data.reduce((total, el) => {
       return total+(el.ProcessingTime-this.timeAvg)**2;
     }, 0)
-    this.timeDeviation = Math.sqrt(this.timeDeviation/this.rowData.length).toFixed(2);
+    this.timeDeviation = Math.sqrt(this.timeDeviation/data.length).toFixed(2);
   }
 }
