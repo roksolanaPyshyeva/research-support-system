@@ -137,7 +137,7 @@ export class ChartComponent implements OnInit {
     this.colors = [
       {
         backgroundColor: '#b8d7ea',
-        hoverBackgroundColor: '#b8d7ea'
+        hoverBackgroundColor: '#0279c1'
       }
     ];
     this.chartData = [
