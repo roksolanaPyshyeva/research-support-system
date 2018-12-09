@@ -7,6 +7,7 @@ import { AgGridComponent } from './ag-grid/ag-grid.component';
 import { AgGridModule } from "ag-grid-angular";
 import { ChartComponent } from './chart/chart.component';
 import { ChartsModule } from 'ng2-charts';
+import { ChartColorComponent } from './chart-color/chart-color.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA2asS4za8BxKFsSuBGedAm1vyoY53fsGs",
@@ -21,7 +22,8 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     AgGridComponent,
-    ChartComponent
+    ChartComponent,
+    ChartColorComponent
   ],
   imports: [
     BrowserModule,

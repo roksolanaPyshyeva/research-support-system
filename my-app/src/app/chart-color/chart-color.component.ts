@@ -2,17 +2,14 @@ import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import {BaseChartDirective} from 'ng2-charts/ng2-charts';
 
 @Component({
-  selector: 'app-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss']
+  selector: 'app-chart-color',
+  templateUrl: './chart-color.component.html',
+  styleUrls: ['./chart-color.component.scss']
 })
-export class ChartComponent implements OnInit {
-
+export class ChartColorComponent implements OnInit {
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
 
-  @Input() rowData:  any;
-  @Input() blackAndWhite:  any;
   @Input() color:  any;
 
   public chartOptions: Object;
@@ -28,22 +25,22 @@ export class ChartComponent implements OnInit {
 
   ngOnInit() {
     this.setChartOptions();
-    this.updateChart(this.blackAndWhite);
+    this.updateChart(this.color);
   }
 
   onChartTypeSelected(type) {
     this.chartType = type;
-    this.updateChart(this.blackAndWhite);
+    this.updateChart(this.color);
   }
 
   onXSelected(xAxes) {
     this.xAxes = xAxes;
     console.log(this.xAxes)
-    this.updateChart(this.blackAndWhite);
+    this.updateChart(this.color);
   }
   onYSelected(yAxes) {
     this.yAxes = yAxes;
-    this.updateChart(this.blackAndWhite);
+    this.updateChart(this.color);
   }
 
   updateChart(data): void {
@@ -149,5 +146,6 @@ export class ChartComponent implements OnInit {
       }
     ];
   }
+
 
 }

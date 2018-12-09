@@ -1,0 +1,17 @@
+.chart {
+    height: 500px;
+    margin-top: 22px;
+    max-width: 1400px;
+    canvas {
+        height: 500px;
+    }
+}
+.chart-selections {
+    display: flex;
+        select {
+            margin-right: 20px;
+        }
+        h4 {
+            margin-bottom: 5px;
+        }
+}

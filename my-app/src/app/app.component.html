@@ -1,5 +1,8 @@
-<div *ngIf = 'rowData'>
-    <app-chart [rowData] = 'rowData'></app-chart>
+<div *ngIf = 'rowData && color && blackAndWhite'>
+    <h3>Chart for black and white pictures</h3>
+    <app-chart [rowData] = 'rowData' [color] = 'color' [blackAndWhite] = 'blackAndWhite' ></app-chart>
+    <h3>Chart for color pictures</h3>
+    <app-chart-color  [color] = 'color' ></app-chart-color>
     <app-ag-grid [rowData] = 'rowData'></app-ag-grid>
 </div>
 
