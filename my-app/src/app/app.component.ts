@@ -23,11 +23,5 @@ export class AppComponent {
     this.af.database.list('/experiments').subscribe((data) => {
       this.rowData = data;      
     });
-    this.af.database.list('/color').subscribe((data) => {
-      this.color = data;      
-    });
-    this.af.database.list('/black-and-white').subscribe((data) => {
-      this.blackAndWhite = data;      
-    });
   }
 }

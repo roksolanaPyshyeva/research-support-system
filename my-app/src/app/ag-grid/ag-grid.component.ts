@@ -9,12 +9,13 @@ import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 
 })
 export class AgGridComponent implements OnInit {
 
-  @Input() rowData:  any;
+  // @Input() rowData:  any;
 
   public items;
   private gridApi;
   private gridColumnApi;
-  // private rowData: any[];
+  private rowData: any[];
+  public chartRows: any[];
 
   private columnDefs;
   public encryptionExperiments = [];
@@ -124,6 +125,7 @@ export class AgGridComponent implements OnInit {
   getExperimentsList(){
     this.af.database.list('/experiments').subscribe((data) => {
       this.rowData = data;
+      this.chartRows = data;
       this.divideEncryptionAndDecryption(this.rowData);
       this.countAnalyticalIndicators(this.rowData);
       
@@ -139,6 +141,7 @@ export class AgGridComponent implements OnInit {
     event.api.getModel().rowsToDisplay.forEach((node) => {
       filteredRows.push(node.data);
     });
+    this.chartRows = filteredRows;
     this.divideEncryptionAndDecryption(filteredRows);
     this.countAnalyticalIndicators(filteredRows);
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges } from '@angular/core';
 import {BaseChartDirective} from 'ng2-charts/ng2-charts';
 
 @Component({
@@ -6,14 +6,14 @@ import {BaseChartDirective} from 'ng2-charts/ng2-charts';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent implements OnInit, OnChanges {
 
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
 
   @Input() rowData:  any;
-  @Input() blackAndWhite:  any;
-  @Input() color:  any;
+  // @Input() blackAndWhite:  any;
+  // @Input() color:  any;
 
   public chartOptions: Object;
   public labels: Object;
@@ -28,22 +28,25 @@ export class ChartComponent implements OnInit {
 
   ngOnInit() {
     this.setChartOptions();
-    this.updateChart(this.blackAndWhite);
+    this.updateChart(this.rowData);
+  }
+
+  ngOnChanges() {
+    this.updateChart(this.rowData);
   }
 
   onChartTypeSelected(type) {
     this.chartType = type;
-    this.updateChart(this.blackAndWhite);
+    this.updateChart(this.rowData);
   }
 
   onXSelected(xAxes) {
     this.xAxes = xAxes;
-    console.log(this.xAxes)
-    this.updateChart(this.blackAndWhite);
+    this.updateChart(this.rowData);
   }
   onYSelected(yAxes) {
     this.yAxes = yAxes;
-    this.updateChart(this.blackAndWhite);
+    this.updateChart(this.rowData);
   }
 
   updateChart(data): void {
@@ -82,10 +85,24 @@ export class ChartComponent implements OnInit {
       //     return this.yAxes + ' : ' + tooltipItem.yLabel.toFixed(4);
       //   }
       // };
+      var colors = [];
+      while (colors.length < 100) {
+        do {
+          var color = Math.floor((Math.random()*1900000)+1);
+        } while (colors.indexOf(color) >= 0);
+      colors.push("#" + ("000000" + color.toString(16)).slice(-6));
+      }
       if(this.chart.chart) {
-        // console.log("bla");
         this.chart.chart.config.data.labels = this.labels;
         this.chart.chart.config.type = this.chartType;
+
+       if(this.chartType === 'pie') {
+          this.chart.chart.config.data.datasets[0].backgroundColor = colors;
+       } else {
+        
+        this.chart.chart.config.data.datasets[0].backgroundColor ='#006865';
+       }
+        console.log( this.chart.chart.config.data.datasets[0].backgroundColor)
         // this.chart.chart.config.options.tooltips.callbacks = callbacks;
         this.chart.chart.update();
       }
@@ -138,14 +155,14 @@ export class ChartComponent implements OnInit {
     };
     this.colors = [
       {
-        backgroundColor: '#b8d7ea',
-        hoverBackgroundColor: '#0279c1'
+        backgroundColor: '#006865',
+        hoverBackgroundColor: '#4c9593'
       }
     ];
     this.chartData = [
       {
         label: 'Experiment',
-        data: []
+        data: [],
       }
     ];
   }

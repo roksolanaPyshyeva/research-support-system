@@ -16,6 +16,11 @@
     [multiSortKey]="multiSortKey"
     ></ag-grid-angular>
 </div>
+
+<div *ngIf = 'chartRows'>
+    <app-chart [rowData] = 'chartRows'  ></app-chart>
+</div>
+
  
 <h4>Processing Time Analytical Indicators</h4>
 <div class="item">
